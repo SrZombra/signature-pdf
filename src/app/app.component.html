@@ -1,0 +1,40 @@
+<div class="info-page">
+  Página {{ page }} / {{ totalPages }}
+</div>
+<div class="container">
+  
+  <div id="pdf-sign">
+
+    <div class="pdf-sign-div">
+      <div *ngIf="showSign" class="example-box" cdkDrag [cdkDragFreeDragPosition]="dragPosition" cdkDragBoundary=".pdf-sign-div">
+        <img style="width: 100%;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Firma_de_Juan_Jos%C3%A9_Pradera.svg/1200px-Firma_de_Juan_Jos%C3%A9_Pradera.svg.png" alt="">
+      </div>
+      <div>
+        <pdf-viewer id="viewer" [src]="pdfSrc" [page]="1" 
+          [show-all]="false" [show-borders]="true"
+          [(page)]="page" (after-load-complete)="loadComplete($event)" [original-size]="true"></pdf-viewer>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-design">
+    <button mat-mini-fab color="primary" (click)="nextPage()">
+      <mat-icon>navigate_next</mat-icon>
+    </button><br>
+    <button mat-mini-fab color="primary" (click)="backPage()">
+      <mat-icon>navigate_before</mat-icon>
+    </button><br>
+    <mat-form-field appearance="outline" class="input-page-width">
+      <input matInput [(ngModel)]="page">
+    </mat-form-field><br><br>
+    <button mat-mini-fab color="primary" (click)="showSignF()">
+      <mat-icon *ngIf="showSign">cancel</mat-icon>
+      <mat-icon *ngIf="!showSign">document_scanner</mat-icon>
+    </button><br>
+    <button *ngIf="showSign" mat-mini-fab color="accent" (click)="sign()">
+      <mat-icon>assignment_turned_in</mat-icon>
+    </button><br>
+  </div>
+</div>
+
+
+
